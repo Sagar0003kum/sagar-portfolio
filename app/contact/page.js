@@ -43,7 +43,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <p className="text-body-sm text-primary-600">
-                I typically respond within 24-48 hours.
+                I typically respond within 10-24 hours.
               </p>
             </Card>
 

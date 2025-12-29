@@ -135,11 +135,11 @@ export function Hero() {
           <motion.div variants={itemVariants} className="mt-16 pt-8 border-t border-primary-200">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
               <div>
-                <p className="font-display text-display-sm text-accent-500 font-bold">5+</p>
+                <p className="font-display text-display-sm text-accent-500 font-bold">2+</p>
                 <p className="text-primary-600 text-body-sm mt-1">Years Experience</p>
               </div>
               <div>
-                <p className="font-display text-display-sm text-accent-500 font-bold">20+</p>
+                <p className="font-display text-display-sm text-accent-500 font-bold">10+</p>
                 <p className="text-primary-600 text-body-sm mt-1">Projects Completed</p>
               </div>
               <div>
@@ -147,7 +147,7 @@ export function Hero() {
                 <p className="text-primary-600 text-body-sm mt-1">Technologies</p>
               </div>
               <div>
-                <p className="font-display text-display-sm text-accent-500 font-bold">100%</p>
+                <p className="font-display text-display-sm text-accent-500 font-bold">75%</p>
                 <p className="text-primary-600 text-body-sm mt-1">Client Satisfaction</p>
               </div>
             </div>
