@@ -26,17 +26,17 @@ export function SectionHeader({
       />
       
       {subtitle && (
-        <p className="text-accent-500 font-medium text-sm uppercase tracking-wider mb-3">
+        <p className="text-accent-500 font-medium text-body-sm uppercase tracking-wider mb-3">
           {subtitle}
         </p>
       )}
       
-      <h2 className="font-bold text-primary-900 text-3xl lg:text-4xl text-balance">
+      <h2 className="font-display font-bold text-primary-900 text-display-md lg:text-display-lg text-balance">
         {title}
       </h2>
       
       {description && (
-        <p className="mt-4 text-primary-600 text-lg max-w-2xl">
+        <p className="mt-4 text-primary-600 text-body-lg max-w-2xl">
           {description}
         </p>
       )}
@@ -56,17 +56,17 @@ export function PageHeader({
         <div className="decorative-line mb-6" />
         
         {subtitle && (
-          <p className="text-accent-500 font-medium text-sm uppercase tracking-wider mb-3">
+          <p className="text-accent-500 font-medium text-body-sm uppercase tracking-wider mb-3">
             {subtitle}
           </p>
         )}
         
-        <h1 className="font-bold text-primary-900 text-4xl lg:text-5xl text-balance">
+        <h1 className="font-display font-bold text-primary-900 text-display-lg lg:text-display-xl text-balance">
           {title}
         </h1>
         
         {description && (
-          <p className="mt-4 text-primary-600 text-lg lg:text-xl max-w-2xl">
+          <p className="mt-4 text-primary-600 text-body-lg lg:text-body-xl max-w-2xl">
             {description}
           </p>
         )}
