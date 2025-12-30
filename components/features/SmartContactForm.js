@@ -15,6 +15,9 @@ const intentOptions = [
   { value: 'general', label: 'General Inquiry', icon: MessageSquare },
 ];
 
+// Web3Forms Access Key for sagar-portfolio-blue.vercel.app
+const WEB3FORMS_KEY = "6008c919-70f5-4534-ae57-36e4bca39547";
+
 export function SmartContactForm({ className }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -58,9 +61,8 @@ export function SmartContactForm({ className }) {
     setSubmitError('');
 
     try {
-      // Use FormData like Web3Forms example
       const formDataToSend = new FormData();
-      formDataToSend.append("access_key", "eba7b670-d24d-41c6-89e6-05d3432f5807");
+      formDataToSend.append("access_key", WEB3FORMS_KEY);
       formDataToSend.append("name", formData.name);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("company", formData.company || "Not provided");
