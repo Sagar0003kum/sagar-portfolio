@@ -7,6 +7,7 @@ import { cn, isValidEmail } from '@/lib/utils';
 import { generateMessageDraft } from '@/lib/ai';
 import { personalInfo } from '@/data/portfolio';
 import { Input, Textarea, Button, Card } from '@/components/ui';
+import emailjs from '@emailjs/browser';
 
 const intentOptions = [
   { value: 'job', label: 'Job Opportunity', icon: Briefcase },
@@ -15,8 +16,10 @@ const intentOptions = [
   { value: 'general', label: 'General Inquiry', icon: MessageSquare },
 ];
 
-// Web3Forms Access Key for sagar-portfolio-blue.vercel.app
-const WEB3FORMS_KEY = "6008c919-70f5-4534-ae57-36e4bca39547";
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = "service_vxu0qr9";
+const EMAILJS_TEMPLATE_ID = "template_3k3igah";
+const EMAILJS_PUBLIC_KEY = "F2PbCnUlo9KH25HiM";
 
 export function SmartContactForm({ className }) {
   const [formData, setFormData] = useState({
@@ -61,32 +64,32 @@ export function SmartContactForm({ className }) {
     setSubmitError('');
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("access_key", WEB3FORMS_KEY);
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("company", formData.company || "Not provided");
-      formDataToSend.append("subject", formData.subject || "New Contact Form Submission");
-      formDataToSend.append("message", formData.message);
+      // EmailJS template parameters
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        company: formData.company || "Not provided",
+        subject: formData.subject || "New Contact Form Submission",
+        message: formData.message,
+      };
 
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formDataToSend
-      });
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.status === 200) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', company: '', subject: '', message: '' });
         setTimeout(() => setSubmitStatus(null), 5000);
       } else {
-        console.log("Error", data);
-        setSubmitError(data.message || 'Failed to send message. Please try again.');
+        setSubmitError('Failed to send message. Please try again.');
         setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('EmailJS error:', error);
       setSubmitError('Failed to send message. Please try again or email directly.');
       setSubmitStatus('error');
     }
