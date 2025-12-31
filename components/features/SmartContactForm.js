@@ -1,13 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Sparkles, Check, AlertCircle, Briefcase, Users, FileText, MessageSquare, Wand2 } from 'lucide-react';
 import { cn, isValidEmail } from '@/lib/utils';
 import { generateMessageDraft } from '@/lib/ai';
 import { personalInfo } from '@/data/portfolio';
 import { Input, Textarea, Button, Card } from '@/components/ui';
-import emailjs from '@emailjs/browser';
 
 const intentOptions = [
   { value: 'job', label: 'Job Opportunity', icon: Briefcase },
@@ -22,6 +21,7 @@ const EMAILJS_TEMPLATE_ID = "template_3k3igah";
 const EMAILJS_PUBLIC_KEY = "F2PbCnUlo9KH25HiM";
 
 export function SmartContactForm({ className }) {
+  const formRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -58,33 +58,48 @@ export function SmartContactForm({ className }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    console.log("Form submit triggered");
+    
+    if (!validate()) {
+      console.log("Validation failed", errors);
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmitError('');
+    setSubmitStatus(null);
 
     try {
-      // EmailJS template parameters
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        company: formData.company || "Not provided",
-        subject: formData.subject || "New Contact Form Submission",
-        message: formData.message,
-      };
+      console.log("Sending to EmailJS...");
+      
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: {
+            from_name: formData.name,
+            from_email: formData.email,
+            company: formData.company || "Not provided",
+            subject: formData.subject || "New Contact Form Submission",
+            message: formData.message,
+          }
+        })
+      });
 
-      const response = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
+      console.log("Response status:", response.status);
 
       if (response.status === 200) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', company: '', subject: '', message: '' });
         setTimeout(() => setSubmitStatus(null), 5000);
       } else {
+        const errorText = await response.text();
+        console.log("Error response:", errorText);
         setSubmitError('Failed to send message. Please try again.');
         setSubmitStatus('error');
       }
@@ -221,7 +236,7 @@ export function SmartContactForm({ className }) {
       </Card>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input
             label="Name"
