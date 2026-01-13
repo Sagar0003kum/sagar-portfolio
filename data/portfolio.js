@@ -271,46 +271,48 @@ export const projects = [
       screenshots: [],
     },
   },
- /*{
+ {
     id: "proj-2",
-    title: "Task Management App",
-    slug: "task-management-app",
+    title: "TeamHub - Collaborative Project Management Platform ",
+    slug: "team-hub",
     category: "personal",
     type: "Web Application",
     status: "completed",
     featured: true,
     
-    shortDescription: "A collaborative task management tool with real-time updates.",
-    fullDescription: `Developed a Trello-like task management application with real-time collaboration features.`,
+    shortDescription: "A full-stack collaborative platform with workspaces, Kanban boards, and document management.",
+    fullDescription: `Built a comprehensive team collaboration platform using Vue.js and FastAPI. Features include user authentication, workspace management, project organization, interactive Kanban boards with drag-and-drop functionality, task management with priorities, and document creation. Designed a PostgreSQL database with 7 related tables and implemented 20+ RESTful API endpoints with JWT authentication.`,
 
     keyFeatures: [
-      "Drag and drop interface",
-      "Real-time collaboration with WebSockets",
-      "Team workspaces and permissions",
-      "Due dates and reminders",
+      "Drag-and-drop Kanban board with task status columns",
+      "JWT authentication with secure user registration and login",
+      "Workspace and project management with team members",
+      "Real-time dashboard with task statistics and analytics",
+      "Document creation and editing within projects",
+      "RESTful API with comprehensive error handling",
     ],
     
-    techStack: ["Next.js", "Socket.io", "PostgreSQL", "Tailwind CSS"],
+    techStack: ["Vue.js", "Python", "FastAPI", "PostgreSQL", "Pinia", "Tailwind CSS", "JWT", "Vite"],
     
     role: "Full Stack Developer",
-    teamSize: 2,
+    teamSize: 1,
     
-    startDate: "Jan 2023",
-    endDate: "Mar 2023",
-    year: 2023,
-    duration: "3 months",
+    startDate: "Jan 2026",
+    endDate: "Jan 2026",
+    year: 2026,
+    duration: "1 week",
     
     links: {
-      github: "https://github.com/yourusername/task-manager",
-      live: "https://taskboard-demo.vercel.app",
+      github: "https://github.com/Sagar0003kum/team-hub",
+      live: "https://team-hub-blue.vercel.app",
     },
     
     images: {
-      thumbnail: "/images/projects/taskboard-thumb.jpg",
+      thumbnail: "/images/projects/dashboard.jpg",
       screenshots: [],
     },
   },
-  {
+ /*{
     id: "proj-3",
     title: "Course Scheduler",
     slug: "course-scheduler",
